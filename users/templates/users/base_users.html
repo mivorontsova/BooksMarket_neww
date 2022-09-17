@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <link type="text/css" href="{{ url_for('.static', filename='css/styles.css')}}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+<div class="container">
+    <div class="mainmenu__header">
+    {% block content -%}
+        {%- block mainmenu -%}
+        <a class="logo" href={{url_for("index") + "users/index"}}>
+          <img class="logo-img" src={{url_for("index") + "users/static/images/logo.svg" }} alt="logo">
+        </a>
+        <ul class="mainmenu">
+            <li><a class="mainmenu-link" href={{url_for(".index")}}>Главная</a></li>
+            <li><a class="mainmenu-link" href={{url_for(".create")}}>Профиль</a></li>
+            <li><a class="mainmenu-link" href={{url_for(".msg")}}>Обратная связь</a></li>
+            <li><a class="mainmenu-link" href={{url_for(".cart")}}>Корзина<img src={{url_for("index") + "users/static/images/cart-black.svg"}} alt="cart"></a></li>
+            <li><a class="mainmenu-link" href={{url_for(".logout")}}>Выйти</a></li>
+
+        </ul>
+        {% endblock mainmenu -%}
+    </div>
+    <div class="clear"></div>
+    <div class="content">
+<h1>{{title}}</h1>
+    {% endblock -%}
+        </div>
+</div>
+</body>
+
+</html>

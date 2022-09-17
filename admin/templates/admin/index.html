@@ -1,0 +1,57 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Активные заказы
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список активных заказов</h1>
+<div class="table-box">
+	<table class="index__table index__table-one">
+		<tr>
+
+			<td class="index__td-text">Ф.И.О</td>
+			<td class="index__td-text">Номер телефона</td>
+			<td class="index__td-text">Электронная почта</td>
+
+        </tr>
+		{% for i in user %}
+            <tr>
+                <td class="index__td">{{ i.name }}</td>
+				<td class="index__td">{{ i.number }}</td>
+				<td class="index__td">{{ i.email }}</td>
+            </tr>
+        {% endfor %}
+	</table>
+    <table class="index__table"  width="100%">
+        <tr>
+			<td class="index__td-text">Логин</td>
+
+			<td class="index__td-text">Товар</td>
+			<td class="index__td-text">Вид доставки</td>
+            <td class="index__td-text">Место жительства</td>
+			<td class="index__td-text">Статус заказа</td>
+        </tr>
+
+        {% for i in list %}
+            <tr>
+				<td class="index__td">{{ i.login }}</td>
+
+				<td class="index__td">{{ i.product }}</td>
+				<td class="index__td">{{ i.delivary }}</td>
+				<td class="index__td">{{ i.live }}</td>
+				<td class="create__td">{{ i.state }}</td>
+            </tr>
+		{% endfor %}
+
+    </table>
+</div>
+{% endblock %}

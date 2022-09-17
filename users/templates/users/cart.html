@@ -1,0 +1,96 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Информация о заказах
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Корзина
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список товаров</h1>
+    <div class="table-box">
+    <table class="index__table index__table-one" width="100%">
+        <tr>
+			<td  class="prod__td-text">Автор</td>
+        <td  class="prod__td-text">Название</td>
+        <td  class="prod__td-text">Год публикации</td>
+        <td  class="prod__td-text">Цена</td>
+
+
+
+        </tr>
+
+            {% for j in prod %}
+            <tr>
+
+                <td class="prod__td">{{ j.author }}</td>
+                <td class="prod__td">{{ j.name }}</td>
+                <td class="prod__td">{{ j.time }}</td>
+                <td class="prod__td">{{ j.price }}</td>
+
+            {% endfor %}
+
+
+            {% for i in list %}
+
+
+
+            </tr>
+        {% endfor %}
+    </table>
+        <table class="index__table" width="100%">
+        <tr>
+
+			<td class="index__td-text index-text__state">Статус заказа</td>
+            <td class="index__td-text index-text__state">Имя пользователя</td>
+
+        </tr>
+
+            {% for j in prod %}
+            <tr>
+
+
+            {% endfor %}
+
+
+            {% for i in list %}
+
+                <td class="index__td">{{ i.state }}</td>
+                <td class="index__td">{{ i.username }}</td>
+                <td>
+
+                    <p class="index__text" ><a class="index__btn-cart" href={{url_for("index") + "users/orders/" + i.id|string}}>
+                        Заказать
+                    </a>
+                    <p class="index__text" ><a class="index__btn-cart" href={{url_for("index") + "users/deleteCart/"  + i.id|string}}>
+                        Удалить
+                    </a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+	
+{% endblock %}

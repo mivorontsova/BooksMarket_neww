@@ -1,0 +1,67 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Заказы
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".cart")}}>
+                  Корзина
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Добавление заказа
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h2 style="text-align: center">Добавление заказа</h2>
+	<div class="orders__forms">
+        <form class="orders__form" action="" method="POST">
+			<p><b>Ваш логин:</b><br>
+            <input class="orders__input" type="text" name="login" id="login" required="required" value="{{stud.username}}">
+			</p>
+			<p><b>Ваше Ф.И.О:</b><br>
+            <input class="orders__input" type="text" name="name" id="name" required="required" value="{{stud.name}}">
+			</p>
+			<p><b>Ваш номер телефона:</b><br>
+            <input class="orders__input" type="number" name="number" id="number" required="required" value="{{stud.number}}">
+			</p>
+			<p><b>Ваша электронная почта:</b><br>
+            <input class="orders__input" type="text" name="email" id="email" required="required" value="{{stud.email}}">
+			</p>
+			<p><b>Выбор товара:</b><Br>
+            <input class="orders__input" type="number" name="product" id="product" required="required" value="{{pr.id}}">
+			</p>
+			<p><b>Выбор доставки:</b><Br>
+			<input class="orders__delivary" type="radio" name="delivary" id="delivary" value="Экспресс доставка" required="required"> Экспресс доставка<Br>
+			<input class="orders__delivary" type="radio" name="delivary" id="delivary" value="Доставка курьером" required="required"> Доставка курьером<Br>
+			<input class="orders__delivary" type="radio" name="delivary" id="delivary" value="Доставка на почту" required="required"> Доставка на почту<Br>
+			</p>
+			<a class="orders__delivary-info" href={{url_for("index") + "users/delivary"}} target="_blank">Информация о доставке</a>
+			<p><b class="orders__input">Место жительства:</b><br>
+            <p><textarea class="orders__input" name="live" id="live" rows=7 cols=40></textarea> </p>
+
+            <input class="orders__input-btn" type="submit" value="Отправить"><br>
+        </form>
+    </div>
+
+{% endblock %}

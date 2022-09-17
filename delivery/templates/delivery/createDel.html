@@ -1,0 +1,41 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+Доставка
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/orders"}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Изменение
+                </a>
+              </li>
+            </ul>
+          </div>
+
+<div class="create">
+<h1 class="create__title">Обновление</h1>
+    <div class="create__forms">
+        <form class="create__form" action={{url_for("index") + "delivery/createDel/"  + stud.id|string}} method="POST">
+            <input class="create__input" type="text" name="name" id="name" placeholder="Название" value="{{stud.name}}">
+            <input class="create__input" type="text" name="login" id="login" placeholder="Логин" value="{{stud.login}}">
+            <input class="create__input" type="number" name="number" id="number" placeholder="Номер" value="{{stud.number}}">
+            <input class="create__input" type="text" name="days" id="days" placeholder="Время" value="{{stud.days}}">
+            <input class="create__input" type="text" name="price" id="price" placeholder="Цена" value="{{stud.price}}">
+            <input class="create__input" type="text"  name="about" id="about" placeholder="Описание" value="{{stud.about}}">
+
+            <input class="create__btn" type="submit" value="Обновить"><br>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

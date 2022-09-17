@@ -1,0 +1,61 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Книга
+{% endblock %}
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+    <ul class="breadcrumbs__list">
+        <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                Главная
+            </a>
+        </li>
+        <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="#">
+                Поиск
+            </a>
+        </li>
+    </ul>
+</div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+ <form class="search__form" action="{{url_for('.search')}}" method="POST">
+     <p>Введите полностью название книги (Например: Война и мир) или автора (Например: Толстой Лев)
+            <p><input class="search__input" type="text" name="author" id="author" placeholder="Автор" >
+            <input class="search__input" type="text" name="name" id="name" placeholder="Название" >
+            <input class="search__input-btn" type="submit" value="Найти"><br>
+        </form>
+
+<table class="search__table" width="100%">
+    <tr>
+        <td class="search__td-text">Автор</td>
+        <td class="search__td-text">Название</td>
+        <td class="search__td-text">Год публикации</td>
+        <td class="search__td-text">Издательство</td>
+    </tr>
+
+         {% for i in book %}
+        <td class="search__td">{{ i.author }}</td>
+        <td class="search__td">{{ i.name }}</td>
+        <td class="search__td">{{ i.time }}</td>
+        <td class="search__td">{{ i.house }}</td>
+</table>
+
+
+<div class="search-inner">
+<td><button class="btn">
+<a class="search__btn" href={{url_for("index") + "users/prod/" + i.id|string}}>Просмотреть</a>
+</button></td>
+    </div>
+{% endfor %}
+
+
+{% endblock %}

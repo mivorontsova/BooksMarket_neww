@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <link type="text/css" href="{{ url_for('.static', filename='css/styles.css')}}" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    </head>
+    <div class="container">
+        <div class="logo">
+            <a class="logo" href={{url_for("index") + "users/index"}}>
+              <img class="logo-img" src={{url_for("index") + "users/static/images/logo.svg"}} alt="logo">
+            </a>
+            <h3 class="title-book">Книжный интернет-магазин</h3>
+            <div class="index-forms">
+                <form  class="login-form" action={{url_for("login")}}>
+                    <p><input class="input-login" type="submit" value="Войти"></p>
+                </form>
+                <form class="reg-form" action={{url_for("register")}}>
+                    <p><input class="input-reg" type="submit" value="Зарегистрироваться"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="img-container">
+        <div class="container">
+            <div class="img-wrapper">
+                Книга – это мечта, которую ты держишь в руках.<br/>
+             </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="img-box">
+            <h2 class="img-title">
+                О нас
+            </h2>
+            <p class="img-text">
+                Добро пожаловать!<br/>
+                Наш сайт это удобный интернет-магазин. В нём можно заказывать книги разных жанров.<br/>
+                Выбирайте то, что поднимет настроение!
+            </p>
+            <p class="img-text">
+                Покупать книги онлайн – это удобно<br/>
+                Что делать, если вам нужна особенная книга? Вдруг её нет в наличии?
+                Чтобы сэкономить время, загляните на наш сайт.
+                Мы доставляем книги почтой, курьером.
+                В нашем магазине удобно делать заказы.<br/>
+
+                Книги ждут вас!
+            </p>
+
+        </div>
+    </div>
+
+
+

@@ -1,0 +1,82 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Товары
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Книги
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="product">
+ <h2 class="product__title" style="text-align: center">Добавление данных</h2>
+    <div class="product__forms">
+        <form class="product__form" action="{{url_for('.product')}}" method="POST">
+            <input class="product__input" type="text" name="author" id="author" placeholder="Автор" required="required">
+            <input class="product__input" type="text" name="name" id="name" placeholder="Название" required="required">
+            <input class="product__input" type="number" name="time" id="time" placeholder="Год публикации" required="required">
+            <input class="product__input" type="text" name="house" id="house" placeholder="Издательство" required="required">
+            <input class="product__input" type="text" name="price" id="price" placeholder="Цена" required="required">
+            <input class="product__input" type="number"  name="count" id="count" placeholder="Количество" required="required">
+            <p><textarea class="product__input" name="anonce" id="anonce" placeholder="Описание" rows=7 cols=40></textarea> </p>
+
+            <input class="product__btn" type="submit" value="Добавить"><br>
+        </form>
+    </div>
+
+
+<h1 style="text-align: center">Список товаров</h1>
+    <table class="index__table" width="100%">
+        <tr>
+			<td class="index__td-text">Автор</td>
+			<td class="index__td-text">Название</td>
+			<td class="index__td-text">Год публикации</td>
+			<td class="index__td-text">Издательство</td>
+			<td class="index__td-text">Цена</td>
+            <td class="index__td-text">Действия</td>
+        </tr>
+
+        {% for i in prod %}
+            <tr>
+                <td class="index__td">{{ i.author }}</td>
+				<td class="index__td">{{ i.name }}</td>
+				<td class="index__td">{{ i.time }}</td>
+				<td class="index__td">{{ i.house }}</td>
+				<td class="index__td">{{ i.price }}</td>
+                <td>
+                    <a class="create__link" href={{url_for("index") + "admin/delete/" + i.id|string}}>Удалить</a>
+                    <br>
+                    <a  href={{url_for("index") + "admin/create/" + i.id|string}}>Изменить</a>
+                    <br>
+                    <a  href={{url_for("index") + "admin/prod/" + i.id|string}}>Просмотреть</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+<a class="index__btn-search" href={{url_for("index") + "admin/search"}}>
+    <img class="index__btn-search__img"  src={{url_for("index") + "users/static/images/search-white.svg"}} alt="logo">
+    Поиск
+</a>
+</div>
+{% endblock %}

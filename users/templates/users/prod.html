@@ -1,0 +1,50 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Книга
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".search")}}>
+                  Поиск
+                </a>
+              </li>
+                <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Книги
+                </a>
+              </li>
+            </ul>
+          </div>
+<h1 style="text-align: center">Книги</h1>
+<table class="prod__table"  width="100%">
+    <tr>
+        <td  class="prod__td-text">Автор</td>
+        <td  class="prod__td-text">Название</td>
+        <td  class="prod__td-text">Год публикации</td>
+        <td  class="prod__td-text">Издательство</td>
+        <td  class="prod__td-text">Цена</td>
+        <td  class="prod__td-text">Оставшееся количество</td>
+        <td  class="prod__td-text">Описание</td>
+    </tr>
+
+    <td class="prod__td">{{ prod.author }}</td>
+    <td class="prod__td">{{ prod.name }}</td>
+    <td class="prod__td">{{ prod.time }}</td>
+    <td class="prod__td">{{ prod.house }}</td>
+    <td class="prod__td">{{ prod.price }}</td>
+    <td class="prod__td">{{ prod.count }}</td>
+    <td class="prod__td">{{ prod.anonce }}</td>
+
+</table>
+{% endblock %}

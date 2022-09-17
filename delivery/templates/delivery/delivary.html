@@ -1,0 +1,44 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+О доставке
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".orders")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Доставка
+                </a>
+              </li>
+            </ul>
+          </div>
+<h1 style="text-align: center">О доставке</h1>
+    <table border="1" width="100%">
+        <tr>
+			<td>Вид доставки</td>
+			<td>Номер телефона</td>
+			<td>Время доставки(дни)</td>
+			<td>Стоимость доставки(руб)</td>
+			<td>О доставке</td>
+        </tr>
+
+        {% for u in list %}
+            <tr>
+				<td>{{ u.name }}</td>
+                <td>{{ u.number }}</td>
+				<td>{{ u.days }}</td>
+				<td>{{ u.price }}</td>
+				<td>{{ u.about }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+	
+{% endblock %}

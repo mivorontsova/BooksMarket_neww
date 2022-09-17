@@ -1,0 +1,54 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Главная
+{% endblock %}
+
+{% block content %}
+
+{{ super() }}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список товаров</h1>
+
+    <table class="index__table" width="100%">
+        <tr class="index__tr">
+			<td class="index__td-text">Автор</td>
+			<td class="index__td-text">Название</td>
+			<td class="index__td-text">Год публикации</td>
+			<td class="index__td-text">Издательство</td>
+			<td class="index__td-text">Цена</td>
+            <td class="index__td-text">Действия</td>
+        </tr>
+
+        {% for i in prod %}
+            <tr class="index__tr">
+                <td class="index__td">{{ i.author }}</td>
+				<td class="index__td">{{ i.name }}</td>
+				<td class="index__td">{{ i.time }}</td>
+				<td class="index__td">{{ i.house }}</td>
+				<td class="index__td">{{ i.price }}</td>
+                <td>
+                    <a class="index__btn" href={{url_for("index") + "users/prod/"  + i.id|string}}>Просмотреть</a>
+                    <p class="index__text" ><a class="index__btn-cart" href={{url_for("index") + "users/accept/"  + i.id|string}}>
+                        <img class="index-cart__img" src={{url_for("index") + "users/static/images/cart.svg"}} alt="cart">
+                        Добавить
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<a class="index__btn-search" href={{url_for("index") + "users/search"}}>
+    <img class="index__btn-search__img"   src={{url_for("index") + "users/static/images/search-white.svg"}} alt="search">
+    Поиск
+</a>
+
+{% endblock %}

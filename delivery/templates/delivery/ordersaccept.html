@@ -1,0 +1,88 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+Информация о заказах
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/index"}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Список принятых заказов
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список принятых заказов</h1>
+<div class="table-box">
+    <table class="index__table index__table-one">
+        <tr>
+
+			<td class="index__td-text-table">Ф.И.О</td>
+			<td class="index__td-text-table">Номер телефона</td>
+			<td class="index__td-text-table">Электронная почта</td>
+
+        </tr>
+
+        {% for i in user %}
+            <tr>
+
+                <td class="index__td">{{ i.name }}</td>
+				<td class="index__td">{{ i.number }}</td>
+				<td class="index__td">{{ i.email }}</td>
+
+            </tr>
+        {% endfor %}
+    </table>
+    <table class="index__table " width="100%">
+        <tr>
+			<td class="index__td-text">Логин</td>
+			<td class="index__td-text">Товар</td>
+			<td class="index__td-text">Вид доставки</td>
+            <td class="index__td-text">Место жительства</td>
+			<td class="index__td-text">Статус заказа</td>
+			<td class="index__td-text">Обновить статус заказа</td>
+        </tr>
+
+        {% for i in list %}
+            <tr>
+				<td class="index__td">{{ i.login }}</td>
+				<td class="index__td">{{ i.product }}</td>
+				<td class="index__td">{{ i.delivary }}</td>
+				<td class="index__td">{{ i.live }}</td>
+				<td class="index__td">{{ i.state }}</td>
+				
+				<td>
+				<form action={{url_for("index") + "delivery/create/" + i.id|string}} method="POST">
+					<input type="radio" name="state" id="state" value="Заказ в пути" required="required"> Заказ в пути<Br>
+					<input type="radio" name="state" id="state" value="Заказ прибыл к месту назначения" required="required"> Заказ прибыл к месту назначения<Br>
+				<input class="orders-acc__btn" type="submit" value="Обновить"><br>
+				</form>
+				</td>
+				<td>
+					<a href={{url_for("index") + "delivery/delete1/" + i.id|string}}>Завершить заказ</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+</div>
+	
+{% endblock %}
+

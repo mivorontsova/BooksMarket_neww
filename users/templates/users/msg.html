@@ -1,0 +1,91 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Сообщения
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Чат</h1>
+<div class="info">
+<p class="dop-info">Для отправки сообщения продавцу напишите логин - admin</p>
+<p class="dop-info">Для отправки сообщения доставщику напишите логин - delivery</p>
+    </div>
+<div class="msg__forms">
+<form class="msg__form" action="{{url_for('.msg')}}" method="POST">
+            <input class="msg__input" type="text" name="username" id="username" placeholder="Получатель" required="required">
+            <input class="msg__input" type="text" name="msg" id="msg" placeholder="Сообщение" required="required">
+
+            <input class="msg__input-btn" type="submit" value="Отправить"><img class="msg__btn-mess__img"  src={{url_for("index") + "users/static/images/msg.svg"}} alt="msg">
+    <br>
+</form>
+</div>
+<h1 style="text-align: center">Сообщения</h1>
+<div class="msg__inner">
+<h2 class="msg__btn-com-title">
+    Входящие
+    <img class="msg__btn-com"  src={{url_for("index") + "users/static/images/msg-com.svg"}} alt="msg">
+</h2>
+<div class="msg__tables">
+    <table class="msg__table" width="100%">
+        <tr>
+			<td class="msg__td">Сообщение</td>
+			<td class="msg__td">От кого</td>
+            <td class="msg__td">Действия</td>
+        </tr>
+        {% for i in mes %}
+            <tr>
+                <td class="msg__td">{{ i.msg }}</td>
+				<td class="msg__td">{{ i.name }}</td>
+                <td class="msg__td">
+                    <a class="msg__delete" href={{url_for("index") + "users/deleteMsg/" + i.id|string}}>Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+<h2 class="msg__btn-send-title">Отправленные
+<img class="msg__btn-send"  src={{url_for("index") + "users/static/images/msg-com.svg"}} alt="msg"></h2>
+    <div class="msg__tables">
+    <table class="msg__send" width="100%">
+        <tr>
+			<td class="msg__send">Сообщение</td>
+			<td class="msg__send">Кому</td>
+            <td class="msg__send">Действия</td>
+        </tr>
+        {% for i in mes1 %}
+            <tr>
+                <td class="msg__send">{{ i.msg }}</td>
+				<td class="msg__send">{{ i.username }}</td>
+                <td class="msg__send">
+                    <a class="msg__delete" href={{url_for("index") + "users/deleteMsg/" + i.id|string}}>Удалить</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+        </div>
+    </div>
+
+{% endblock %}

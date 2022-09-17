@@ -1,0 +1,53 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Покупатели
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Список покупателей
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список покупателей</h1>
+    <table class="index__table"  width="100%">
+        <tr>
+			<td class="index__td-text">Имя</td>
+			<td class="index__td-text">Логин</td>
+			<td class="index__td-text">Email</td>
+			<td class="index__td-text">Телефон</td>
+            <td class="index__td-text">Действия</td>
+        </tr>
+
+        {% for i in us %}
+            <tr>
+                <td class="index__td"> {{ i.name }}</td>
+				<td class="index__td">{{ i.username }}</td>
+				<td class="index__td">{{ i.email }}</td>
+				<td class="index__td">{{ i.number }}</td>
+                <td>
+                    <a class="create__link" href={{url_for("index") + "admin/deleteUser/" + i.id|string}}>Удалить пользователя</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+Доставка
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/"}}>
+                  Главная
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="product">
+ <h2 class="product__title" style="text-align: center">Добавление данных</h2>
+    <div class="product__forms">
+        <form class="product__form" action="{{url_for("index") + "delivery/index"}}" method="POST">
+            <input class="product__input" type="text" name="name" id="name" placeholder="Название" required="required">
+            <input class="product__input" type="text" name="login" id="login" placeholder="Логин" required="required">
+            <input class="product__input" type="number" name="number" id="number" placeholder="Номер" required="required">
+            <input class="product__input" type="text" name="days" id="days" placeholder="Время" required="required">
+            <input class="product__input" type="text" name="price" id="price" placeholder="Цена" required="required">
+            <p><textarea class="product__input" name="about" id="about" placeholder="Описание" rows=7 cols=40></textarea> </p>
+
+            <input class="product__btn" type="submit" value="Добавить"><br>
+        </form>
+    </div>
+
+<h1 style="text-align: center">О доставке</h1>
+    <table class="delivary__table" width="100%">
+        <tr>
+			<td class="delivary__td-text">Вид доставки</td>
+			<td class="delivary__td-text">Номер телефона</td>
+			<td class="delivary__td-text">Время доставки(дни)</td>
+			<td class="delivary__td-text">Стоимость доставки(руб)</td>
+			<td class="delivary__td-text">О доставке</td>
+        </tr>
+
+        {% for u in info %}
+            <tr>
+				<td class="delivary__td">{{ u.name }}</td>
+                <td class="delivary__td">{{ u.number }}</td>
+				<td class="delivary__td">{{ u.days }}</td>
+				<td class="delivary__td">{{ u.price }}</td>
+				<td class="delivary__td">{{ u.about }}</td>
+                <td><a class="create__link" href={{url_for("index") + "delivery/deleteDel/" + u.id|string}}>Удалить</a>
+                <br>
+                <a class="create__link" href={{url_for("index") + "delivery/createDel/" + u.id|string}}>Обновить</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}

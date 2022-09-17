@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="logo">
+
+    <a class="logo" href={{url_for("index") + "users/index"}}>
+      <img class="logo-img" src={{url_for("index") + "users/static/images/logo.svg"}} alt="logo">
+    </a>
+    <h3 class="title-book">Книжный интернет-магазин</h3>
+  </div>
+</div>
+<div class="page-404">
+
+  <div class="page-404__content">
+    <h1 class="page-404__title">Страница не найдена, вернуться на <a class="page-404__back"
+        href="{{url_for('index')}}">главную</a> </h1>
+  </div>
+  <img class="page-404__img" src={{url_for("index") + "static/images/404.png"}} alt="error">
+  {% endblock %}
+</div>

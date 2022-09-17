@@ -1,0 +1,52 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Страница
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+                <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".product")}}>
+                  Книги
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Обновление
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<div class="create">
+<h1 class="create__title">Обновление</h1>
+    <div class="create__forms">
+        <form class="create__form" action={{url_for("index") + "admin/create/"  + stud.id|string}} method="POST">
+            <input class="create__input" type="text" name="author" id="author" placeholder="Автор" value="{{stud.author}}">
+            <input class="create__input" type="text" name="name" id="name" placeholder="Название" value="{{stud.name}}">
+            <input class="create__input" type="number" name="time" id="time" placeholder="Год публикации" value="{{stud.time}}">
+            <input class="create__input" type="text" name="house" id="house" placeholder="Издательство" value="{{stud.house}}">
+            <input class="create__input" type="text" name="price" id="price" placeholder="Цена" value="{{stud.price}}">
+            <input class="create__input" type="text"  name="anonce" id="anonce" placeholder="Описание" value="{{stud.anonce}}">
+            <input class="create__input" type="number"  name="count" id="count" placeholder="Количество" value="{{stud.count}}">
+
+            <input class="create__btn" type="submit" value="Обновить"><br>
+        </form>
+    </div>
+</div>
+{% endblock %}

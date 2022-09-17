@@ -1,0 +1,168 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+Страница
+{% endblock %}
+
+{% block content %}
+
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Профиль
+                </a>
+              </li>
+            </ul>
+          </div>
+
+<div class="create">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 class="create__title">Обновление</h1>
+
+    <div class="create__forms">
+        <form class="create__form" action={{url_for("index") + "users/create"}} method="POST">
+            <input class="create__input" type="text" name="name" id="name" placeholder="Имя" value="{{stud.name}}">
+
+            <input class="create__input" type="text" name="email" id="email" placeholder="Почта" value="{{stud.email}}">
+            <input class="create__input" type="text" name="number" id="number" placeholder="Номер" value="{{stud.number}}">
+            <input class="create__input" type="password" name="psw" id="psw" placeholder="Пароль" value="{{stud.psw}}">
+            <input class="create__input" type="password"  name="psw2" id="psw2" placeholder="Повтор пароля" value="{{psw2}}">
+            <input class="create__btn" type="submit" value="Обновить"><br>
+        </form>
+    </div>
+
+<h1 class="create__title" style="text-align: center">Список заказов</h1>
+    <div class="create_tables">
+        <table class="create__table" width="100%">
+            <tr class="create__tr">
+			    <td class="create__td-text">Логин</td>
+			    <td class="create__td-text">Ф.И.О</td>
+			    <td class="create__td-text">Номер телефона</td>
+			    <td class="create__td-text">Электронная почта</td>
+
+            </tr>
+             {% for j in prod %}
+
+                <td class="index__td">{{ j.username }}</td>
+                <td class="index__td">{{ j.name }}</td>
+                <td class="index__td">{{ j.number }}</td>
+                <td class="index__td">{{ j.email }}</td>
+
+            </tr>
+        {% endfor %}
+        </table>
+        <table class="create__table" width="100%">
+            <tr class="create__tr">
+
+			    <td class="create__td-text">Товар</td>
+			    <td class="create__td-text">Вид доставки</td>
+                <td class="create__td-text">Место жительства</td>
+            </tr>
+
+
+
+        {% for i in list %}
+            <tr>
+				<td class="create__td">{{ i.product }}
+                <a href={{url_for("index") + "users/prod/" + i.id|string}}>Просмотреть товар</a></td>
+				<td class="create__td">{{ i.delivary }}</td>
+				<td class="create__td">{{ i.live }}</td>
+
+            </tr>
+        {% endfor %}
+
+
+    </table>
+         <table class="create__table" width="100%">
+            <tr class="create__tr">
+
+                <td class="create__td-text">Статус заказа</td>
+            </tr>
+
+        {% for i in list %}
+            <tr>
+
+                <td class="create__td">{{ i.state }}</td>
+				<td>
+					<a  class="create__link" href={{url_for("index") + "users/deleteOrd1/"  + i.id|string}}>Отменить заказ</a>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+</div>
+
+<h1 style="text-align: center">Список принятых заказов</h1>
+    <div class="create_tables">
+    <table class="create-table" width="100%">
+        <tr>
+			<td class="create__td-text">Логин</td>
+			<td class="create__td-text">Ф.И.О</td>
+			<td class="create__td-text">Номер телефона</td>
+			<td class="create__td-text">Электронная почта</td>
+
+
+        </tr>
+        {% for j in prod1 %}
+
+                <td class="index__td">{{ j.username }}</td>
+                <td class="index__td">{{ j.name }}</td>
+                <td class="index__td">{{ j.number }}</td>
+                <td class="index__td">{{ j.email }}</td>
+
+            </tr>
+        {% endfor %}
+
+
+    </table>
+        <table>
+            <td class="create__td-text">Товар</td>
+			<td class="create__td-text">Вид доставки</td>
+            <td class="create__td-text">Место жительства</td>
+            {% for i in info %}
+            <tr>
+
+				<td class="create__td">{{ i.product }}
+                    <a href={{url_for("index") + "users/prod/" + i.id|string}}>Просмотреть товар</a></td>
+				<td class="create__td">{{ i.delivary }}</td>
+				<td class="create__td">{{ i.live }}</td>
+
+            </tr>
+        {% endfor %}
+        </table>
+        <table  width="100%">
+        <tr>
+
+			<td class="create__td-text">Статус заказа</td>
+        </tr>
+
+        {% for i in info %}
+            <tr>
+
+				<td class="create__td">{{ i.state }}</td>
+                <td>
+					<a class="create__link" href={{url_for("index") + "users/deleteOrd/" + i.id|string}}>Подтвердить получение заказа</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+	
+</div>
+
+{% endblock %}

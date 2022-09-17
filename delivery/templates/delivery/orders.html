@@ -1,0 +1,77 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+Заказы
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/"}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Список заказов
+                </a>
+              </li>
+            </ul>
+          </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<h1 style="text-align: center">Список заказов</h1>
+    <div class="table-box">
+    <table  class="index__table index__table-one"  width="100%">
+        <tr>
+			<td  class="index__td-text">Ф.И.О.</td>
+			<td  class="index__td-text">Номер телефона</td>
+			<td  class="index__td-text">Электронная почта</td>
+
+        </tr>
+    {% for j in user1 %}
+            <tr>
+                <td class="index__td">{{ j.name }}</td>
+				<td class="index__td">{{ j.number }}</td>
+				<td class="index__td">{{ j.email }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <table class="index__table">
+            <tr>
+			<td  class="index__td-text">Логин</td>
+			<td  class="index__td-text">Товар</td>
+			<td  class="index__td-text">Вид доставки</td>
+            <td  class="index__td-text">Место жительства</td>
+        </tr>
+            {% for i in list %}
+            <tr>
+				<td class="index__td">{{ i.login }}</td>
+				<td class="index__td">{{ i.product }}</td>
+				<td class="index__td">{{ i.delivary }}</td>
+				<td class="index__td">{{ i.live }}</td>
+                <td>
+
+					<a href={{url_for("index") + "delivery/accept/" + i.id|string}}>Принять</a>
+					<br>
+                    <a href={{url_for("index") + "delivery/delete/" + i.id|string}}>Отклонить</a>
+                    <br>
+                    <a target="_blank" href={{url_for("index") + "delivery/look/" + i.id|string}}>Просмотреть</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+    </div>
+
+
+	
+{% endblock %}

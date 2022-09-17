@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="logo">
+
+    <a class="logo" href={{url_for("index") + "users/index"}}>
+      <img class="logo-img" src={{url_for("index") + "users/static/images/logo.svg"}} alt="logo">
+    </a>
+    <h3 class="title-book">Книжный интернет-магазин</h3>
+  </div>
+</div>
+
+<div class="login__inner">
+  <h3 class="login__inner-title">Страница авторизации</h3>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+  <form action={{url_for("login")}} method="post">
+    <p><label class="login__label">Логин: </label> <input class="login__input" type="text" name="username" value=""
+        required></p>
+    <p><label class="login__label">Пароль: </label> <input class="login__input" type="password" name="psw" value=""
+        required></p>
+    <p><input class="login__label-btn" type="submit" value="Войти"></p>
+    <p><a class="login__a" href="{{url_for('register')}}">Регистрация</a> </p>
+  </form>
+  {% endblock %}
+</div>

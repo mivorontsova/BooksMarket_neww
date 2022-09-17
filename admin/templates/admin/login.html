@@ -1,0 +1,26 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="" method="post">
+    <p><label>Логин: </label> <input type="text" name="username" value="" required></p>
+    <p><label>Пароль: </label> <input type="password" name="psw" value="" required></p>
+    <p><input type="submit" value="Войти"></p>
+</form>
+
+<button>
+    <a href="/">Главная</a>
+</button>
+{% endblock %}

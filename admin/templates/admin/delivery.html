@@ -1,0 +1,44 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Активные заказы
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for(".index")}}>
+                  Главная
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Доставка
+                </a>
+              </li>
+            </ul>
+          </div>
+<h1 style="text-align: center">Доставка</h1>
+    <table  class="delivary__table" width="100%">
+        <tr>
+			<td class="delivary__td-text">Название</td>
+			<td class="delivary__td-text">Номер телефона</td>
+			<td class="delivary__td-text">Время</td>
+			<td class="delivary__td-text">Цена</td>
+			<td class="delivary__td-text">О доставке</td>
+        </tr>
+
+        {% for i in list %}
+            <tr>
+                <td class="delivary__td">{{ i.name }}</td>
+				<td class="delivary__td">{{ i.number }}</td>
+				<td class="delivary__td">{{ i.days }}</td>
+				<td class="delivary__td">{{ i.price }}</td>
+				<td class="delivary__td">{{ i.about }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

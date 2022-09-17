@@ -1,0 +1,48 @@
+{% extends 'delivery/layout.html' %}
+
+{% block title %}
+Заказ
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/orders"}}>
+                  Главная
+                </a>
+              </li>
+                <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href={{url_for("index") + "delivery/orders"}}>
+                  Список заказов
+                </a>
+              </li>
+              <li class="breadcrumbs__item">
+                <a class="breadcrumbs__link" href="#">
+                  Пользователи
+                </a>
+              </li>
+            </ul>
+          </div>
+<table class="delivary__table" width="100%">
+    <tr>
+		<td  class="delivary__td-text">id</td>
+        <td  class="delivary__td-text">Ф.И.О</td>
+		<td  class="delivary__td-text">Номер телефона</td>
+		<td  class="delivary__td-text">Электронная почта</td>
+		<td  class="delivary__td-text">Товар</td>
+		<td  class="delivary__td-text">Вид доставки</td>
+        <td  class="delivary__td-text">Место жительства</td>
+    </tr>
+
+	<td class="delivary__td">{{ look.id }}</td>
+    <td class="delivary__td">{{ user.name }}</td>
+	<td class="delivary__td">{{ user.number }}</td>
+	<td class="delivary__td">{{ user.email }}</td>
+	<td class="delivary__td">{{ look.product }}</td>
+	<td class="delivary__td">{{ look.delivary }}</td>
+	<td class="delivary__td">{{ look.live }}</td>
+
+</table>
+{% endblock %}

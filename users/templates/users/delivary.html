@@ -1,0 +1,30 @@
+{% extends 'users/base_users.html' %}
+
+{% block title %}
+О доставке
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<h1 style="text-align: center">О доставке</h1>
+    <table class="delivary__table" width="100%">
+        <tr>
+			<td class="delivary__td-text">Вид доставки</td>
+			<td class="delivary__td-text">Номер телефона</td>
+			<td class="delivary__td-text">Время доставки(дни)</td>
+			<td class="delivary__td-text">Стоимость доставки(руб)</td>
+			<td class="delivary__td-text">О доставке</td>
+        </tr>
+
+        {% for u in list %}
+            <tr>
+				<td class="delivary__td">{{ u.name }}</td>
+                <td class="delivary__td">{{ u.number }}</td>
+				<td class="delivary__td">{{ u.days }}</td>
+				<td class="delivary__td">{{ u.price }}</td>
+				<td class="delivary__td">{{ u.about }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+	
+{% endblock %}

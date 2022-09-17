@@ -1,0 +1,42 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+<div class="logo">
+
+        <a class="logo" href={{url_for("index") + "users/index"}}>
+          <img class="logo-img" src={{url_for("index") + "users/static/images/logo.svg"}} alt="logo">
+        </a>
+    <h3 class="title-book">Книжный магазин</h3>
+    </div>
+</div>
+
+<div class="register__inner">
+<h3 class="register__inner-title">Страница регистрации</h3>
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for msg in messages %}
+<p class="flash">{{msg}}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<form action="{{url_for('register')}}" method="POST" class="form-contact">
+    <p><label class="register__label">Имя: </label> <input class="register__input" type="text" name="name" value="" required></p>
+    <p><label class="register__label">Логин: </label> <input class="register__input" type="text" name="username" value="" required></p>
+    <p><label class="register__label">Email: </label> <input class="register__input" type="text" name="email" value="" required></p>
+    <p><label class="register__label">Телефон: </label> <input class="register__input" type="number" name="number" value="" required></p>
+    <p><label class="register__label">Пароль: </label> <input class="register__input" type="password" name="psw" value="" required></p>
+    <p><label class="register__label">Повтор пароля: </label> <input class="register__input" type="password" name="psw2" value="" required></p>
+    <p><input class="register__label-btn" type="submit" value="Регистрация"></p>
+</form>
+
+<p><a class="register__a" href="{{url_for('login')}}">Войти</a> </p>
+    </div>
+{% endblock %}
